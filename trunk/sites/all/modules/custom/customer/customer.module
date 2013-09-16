@@ -1,0 +1,36 @@
+<?php 
+
+/**
+ * @file
+ * customer
+ */
+
+
+/**
+ * Implement hook_menu().
+ */
+ 
+function customer_menu(){
+	$items['product'] = array(
+    'title' => t('New product'),
+    'page callback' => 'product_page',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('product list'),
+    'file' => 'customer.pages.inc',
+  );
+  return $items;
+}
+
+
+/**
+ * Implements hook_permission().
+ */
+
+function customer_permission() {
+  return array(
+      'product list' => array(
+          'title' => t('Product page'),
+      ),
+  );
+}

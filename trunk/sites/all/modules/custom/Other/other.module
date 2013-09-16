@@ -1,0 +1,25 @@
+<?php 
+
+/**
+ * @file
+ * customer
+ */
+
+
+/**
+ * Implement hook_menu().
+ */
+ 
+function other_menu(){
+	$items['about_us'] = array(
+    'title' => t('About us'),
+    'page callback' => 'about_us_page',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'other.pages.inc',
+  );
+  return $items;
+}
+
+
+

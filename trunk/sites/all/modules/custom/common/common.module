@@ -1,0 +1,264 @@
+<?php 
+
+
+/**
+ * Implements hook_block_info().
+ */
+function common_block_info() {
+  $blocks = array();
+  $blocks['common_footer'] = array(
+      'info' => t( 'Ticketoutdoor Footer' ),
+      'cache' => DRUPAL_NO_CACHE,
+  );
+  $blocks['common_carousel'] = array(
+      'info' => t( 'Ticketoutdoor Front Carousel' ),
+      'cache' => DRUPAL_NO_CACHE,
+  );
+  $blocks['common_menu'] = array(
+      'info' => t( 'Ticketoutdoor Menu' ),
+      'cache' => DRUPAL_NO_CACHE,
+  );
+  $blocks['common_ad'] = array(
+      'info' => t( 'Ticketoutdoor Ad.' ),
+      'cache' => DRUPAL_NO_CACHE, 		
+  );
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_configure().
+ */
+function common_block_configure($delta) {
+  $form = array();
+  switch ($delta) {
+    case 'common_footer' :
+      $form['common_footer_info'] = array(
+        '#type' => 'textfield',
+        '#title' => t( 'Information' ),
+        '#size' => 6,
+        '#description' => t( 'Enter the information' ), 
+        '#default_value' => variable_get( 'common_footer_info', '' )
+      );
+      break;
+    case 'common_carousel' :
+      $form['common_carousel_info'] = array(
+        '#type' => 'textfield',
+        '#title' => t( 'Front Carousel' ),
+        '#size' => 6,
+        '#description' => t( 'Ticketoutdoor Front Carousel' ),
+        '#default_value' => variable_get( 'common_carousel_info', '' )
+      );
+      break; 
+    case 'common_menu' :
+    	$form['common_menu_info'] = array(
+        '#type' => 'textfield',
+        '#title' => t( 'Menu' ),
+        '#size' => 6,
+        '#description' => t( 'Ticketoutdoor Menu' ),
+        '#default_value' => variable_get( 'common_menu_info', '' )
+      ); 
+      break;
+    case 'common_ad' :
+    	$form['common_ad_info'] = array(
+        '#type' => 'textfield',
+        '#title' => t( 'Ad.' ),
+        '#size' => 6,
+        '#description' => t( 'Ticketoutdoor Ad' ),
+        '#default_value' => variable_get( 'common_ad_info', '' )
+      ); 
+      break;
+      
+  }
+  return $form;
+}
+/**
+ * Implements hook_block_save().
+ */
+function common_block_save($delta = '', $edit = array()) {
+  switch ($delta) {
+    case 'common_footer' :
+      variable_set( 'common_footer_info', $edit ['common_footer_info'] );
+      break;
+    case 'common_carousel' :
+      variable_set( 'common_carousel_info', $edit ['common_carousel_info'] );
+      break;
+    case 'common_menu' :
+    	variable_set( 'common_menu_info', $edit ['common_menu_info'] );
+      break;
+    case 'common_ad' :
+    	variable_set( 'common_ad_info', $edit ['common_ad_info'] );
+      break;
+  }
+  return;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function common_block_view($delta = '') {
+  switch ($delta) {
+    case 'common_footer' :
+      $block['subject'] = '';
+      $block['content'] = common_block_footer();
+    break;
+   	case 'common_carousel' :
+      $block['subject'] = '';
+      $block['content'] = common_block_carousel();
+    break;
+   	case 'common_menu' :
+      $block['subject'] = '';
+      $block['content'] = common_block_menu();
+    break;
+   	case 'common_ad' :
+      $block['subject'] = '';
+      $block['content'] = common_block_ad();
+    break;
+  }
+  return $block;
+}
+
+
+//function common_block_contents($delta){
+//	switch ($delta) {
+//		case 'browseByArtist':
+//			return array('#markup' => theme('browse_by_artist'));
+//			break;	
+//	}
+//}
+/**
+ * Footer content
+ */
+function common_block_footer() {
+  $output = '<footer>
+    <div class="row">
+        <div class="footer-column-1">
+            <strong>关于我们</strong>
+            <ul>
+                <li><a href="">品牌故事</a></li>
+                <li><a href="">消费者俱乐部</a></li>
+                <li><a href="">公司历史</a></li>
+                <li><a href="">博客</a></li>
+                <li><a href="">职位空缺</a></li>
+            </ul>
+        </div>
+        <div class="footer-column-1">
+            <strong>销售与服务</strong>
+            <ul>
+                <li><a href="">尺码指导</a></li>
+                <li><a href="">洗衣指导</a></li>
+                <li><a href="">常见问题</a></li>
+                <li><a href="">隐私及法律条款</a></li>
+                <li><a href="">售后服务</a></li>
+            </ul>
+        </div>
+        <div class="footer-column-2">
+            <strong>媒体</strong>
+            <ul>
+                <li><a href="">产品图片</a></li>
+                <li><a href="">广告视频</a></li>
+            </ul>
+        </div>
+        <div class="footer-column-2">
+            <strong>我们的社会责任</strong>
+            <ul>
+                <li><a href="">社会慈善事业</a></li>
+                <li><a href="">挑战</a></li>
+                <li><a href="">环境保护</a></li>
+            </ul>
+        </div>
+        <div class="footer-column-2">
+            <strong>社交媒体</strong>
+            <ul>
+                <li><a class="ico-1" href="">天猫商城</a></li>
+                <li><a class="ico-2" href="">360buy</a></li>
+                <li><a class="ico-3" href="">新浪微博</a></li>
+            </ul>
+        </div>
+        <div class="clear">
+        </div>
+        <div id="footer-mobile">
+            <img alt="mail" src="images/mail.png"><strong>第一时间获取我们的最新资讯</strong>
+            <div class="clear">
+            </div>
+            <form id="foot-form-mobile">
+                <input type="text" placeholder="请输入您的邮件地址">
+                <input type="submit">
+            </form>
+            <ul>
+                <li><a href="">了解更多关于Ticket Outdoor的故事</a></li>
+                <li><a id="m-icon-1" href="">敬请关注我们的微博</a></li>
+                <li><a id="m-icon-2" href="">前往我们的天猫商店</a></li>
+                <li><a id="m-icon-3" href="">前往我们的京东商店</a></li>
+            </ul>
+        </div>
+        <p>
+            &copy; 2013 TicketOutdoor.com All Rights Reserved.
+        </p>
+    </div>
+    </footer>';
+  return $output;
+}
+
+/**
+ * 广告牌 
+ */
+function common_block_carousel() {
+	$output = 'Advertising board';
+	
+  return $output;
+}
+/** 
+ * menu
+ */
+function common_block_menu(){
+	$mens = menu_main_menu();
+  return '';
+}
+
+/**
+ * 打折信息广告牌
+ */
+function common_block_ad(){
+	$block_ad = block_load('bean', 'sales');
+	$block_ad = block_block_info();
+	print_r($block_ad);
+	bean_view();
+
+	$bean_info = bean_get_all_beans();
+	$output = '<div id="main-content-hold">
+		<div class="row">
+            <div class="featured-product">
+                <h2>超值特惠 特享 <span>6</span>折起</h2>
+                <em>男孩 / 女孩 / 女装</em>
+                <p>
+                    8月-9月 特惠促销期间 <i>指定产品均享受6折的优惠</i>
+                </p>
+            </div>
+            <div class="featured-product-sale">
+                <h2>网购限时<span>特价</span></h2>
+                <p> 男童户外套装</p>
+                <em class="sale-price">原价 <span>¥1988</span></em>
+                <a class="btn" href="">立即前往天猫购买</a>
+                <div class="legend-sale">
+                    sale
+                </div>
+            </div>
+            <div class="featured-product-sale-mobile">
+                <h2>秋季专属优惠</h2>
+                <strong>冬季户外儿童冲锋衣</strong>
+                <em class="sale-price">原价 <span>¥988</span></em>
+                <em class="discounted"><span>¥</span>488</em>
+                <p>
+                    立即选购
+                </p>
+                <div class="legend-sale">
+                    &nbsp;
+                </div>
+            </div>
+        </div></div>';
+	
+	
+	return $output;
+}
+
+

@@ -1,0 +1,10 @@
+name = Customer
+description = "Manage the customer"
+package = ticketoutdoor
+version = VERSION
+core = 7.x
+files[] = customer.module
+dependencies[] = common
+
+version = "7.21"
+project = "drupal"

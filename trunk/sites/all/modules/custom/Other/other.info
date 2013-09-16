@@ -1,0 +1,10 @@
+name = Other
+description = "Manage the other"
+package = ticketoutdoor
+version = VERSION
+core = 7.x
+files[] = other.module
+dependencies[] = other
+
+version = "7.21"
+project = "drupal"

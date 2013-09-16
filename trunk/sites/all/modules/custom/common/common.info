@@ -1,0 +1,9 @@
+name = Common
+description = "Site universal information"
+package = ticketoutdoor
+version = VERSION
+core = 7.x
+files[] = common.module
+
+version = "7.21"
+project = "drupal"
